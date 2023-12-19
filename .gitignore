@@ -1,0 +1,7 @@
+# Skip
+*.cfl
+*.hdr
+*.code-workspace
+*.log
+*-converted-to.pdf
+
