@@ -2,3 +2,6 @@
 ./05_phantom/run.sh
 ./06_motion/run.sh
 
+# scripts not for paper CI pipeline
+# ./04a_speedup_num_error/run.sh
+# ./04b_speed_grog/run.sh

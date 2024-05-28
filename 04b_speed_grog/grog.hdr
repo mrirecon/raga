@@ -1,0 +1,8 @@
+# Dimensions
+4 1 10 1 1 1 1 1 1 1 1 1 1 1 1 1 
+# Command
+join 2 grog_run_000 grog_run_001 grog_run_002 grog_run_003 grog_run_004 grog_run_005 grog_run_006 grog_run_007 grog_run_008 grog_run_009 grog 
+# Files
+ <>grog <grog_run_009 <grog_run_008 <grog_run_007 <grog_run_006 <grog_run_005 <grog_run_004 <grog_run_003 <grog_run_002 <grog_run_001 <grog_run_000
+# Creator
+BART v0.9.00-284-g3107d87

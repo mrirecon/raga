@@ -4,4 +4,6 @@
 *.code-workspace
 *.log
 *-converted-to.pdf
+*.out
+
 

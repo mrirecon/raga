@@ -15,9 +15,9 @@ df786629003f22a184dfc5a73ff48125  data_res_S0021.cfl
 7daa11b7afd6b11497ce5bec163e572f  data_bin_raga.cfl
 568df696e4166c6216abbbea48207ec7  data_bin_raga_ind.cfl
 2bdfa12eb0cca91d1997e7332400deb3  data_bin_ga.cfl
-f87f081e57b329053559e491ae49abf6  data_invivo_raga.cfl
+c3e84b6a72ab5567d46d1e66e17c827d  data_invivo_raga.cfl
 96afc8dd3bf5a28ec329c1f4ff8e7b2a  data_invivo_raga_ind.cfl
-ed34583b1198dc8883cdd587551392e0  data_invivo_ga.cfl
+bdeb4eb4899bc9e027797de4564c4b8a  data_invivo_ga.cfl
 248484b50cdd485b7663b95caaf683f0  data_res_S1597.hdr
 8f76d15d8c5cd93a71cca7c9e7090b21  data_res_S1597_ind.hdr
 d23c16656c3d8a0953925dcfa02fd046  data_res_S0987.hdr
@@ -37,4 +37,4 @@ ae6bbfc478fd33805f20668e9190eed6  data_bin_raga.hdr
 7a7d5ca10cba50e2614800cc065e2174  data_bin_ga.hdr
 d1274e26d01fa9f895f3433a7cd22116  data_invivo_raga.hdr
 34e776692762d3bcd36b987d89391aab  data_invivo_raga_ind.hdr
-d1274e26d01fa9f895f3433a7cd22116  data_invivo_ga.hdr
+8cbb2ebb44b2324d8a3d980534fc5f60  data_invivo_ga.hdr

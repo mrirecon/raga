@@ -5,7 +5,20 @@
 """
 import sys
 import os
-sys.path.insert(0, os.path.join(os.environ['TOOLBOX_PATH'], 'python'))
+
+# Check if environmental variable pointing to BART is set correctly
+if "TOOLBOX_PATH" in os.environ:
+	sys.path.insert(0, os.path.join(os.environ['TOOLBOX_PATH'], 'python'))
+elif "BART_TOOLBOX_PATH" in os.environ:
+	sys.path.insert(0, os.path.join(os.environ['BART_TOOLBOX_PATH'], 'python'))
+else:
+	raise AttributeError( \
+		"The Path to the BART toolbox is not set.\n \
+		Please set the environment variable `TOOLBOX_PATH` or `BART_TOOLBOX_PATH` in your shell:\n \
+		\t`export TOOLBOX_PATH=<Path to BART Toolbox>`\n \
+		Example: \n \
+		\t`export TOOLBOX_PATH=/home/user/bart`\n")
+
 import cfl
 
 import numpy as np
@@ -106,8 +119,8 @@ if __name__ == "__main__":
 		"font.sans-serif": "Helvetica",
 	})
 
-	dia_raga = [13, 18, 10, 12]
-	dia_ga = [11, 14, 17, 23]
+	dia_raga = [10, 15, 8, 12]
+	dia_ga = [11, 15, 8, 12]
 
 	# Visualization
 
@@ -116,8 +129,8 @@ if __name__ == "__main__":
 	for i in range(0, dim[2]):
 
 		# Define line
-		s = [24, 130]
-		e = [78, 37]
+		s = [32, 112]
+		e = [103, 22]
 
 
 		ax[i,0].imshow(data_raga[:,:,i,dia_raga[i]], cmap="gray")
@@ -209,9 +222,9 @@ if __name__ == "__main__":
 
 	ax[0,0].text(-0.4*dim[0], dim[2]//2 * dim[1], "Spokes / Frame", horizontalalignment='center', verticalalignment='center', color=TCOLOR, rotation="vertical", fontsize=FS, fontweight="bold")
 
-	ax[0,0].text(1.1*dim[0], -0.17*dim[1], r'$\psi_{13}^1$', horizontalalignment='center', verticalalignment='center', color=TCOLOR, rotation="horizontal", fontsize=FS+5, fontweight="bold")
+	ax[0,0].text(1.1*dim[0], -0.17*dim[1], r'RAGA $\psi_{13}^1$', horizontalalignment='center', verticalalignment='center', color=TCOLOR, rotation="horizontal", fontsize=FS+5, fontweight="bold")
 
-	ax[0,2].text(1.1*dim[0], -0.2*dim[1], r'$\psi^1$', horizontalalignment='center', verticalalignment='center', color=TCOLOR, rotation="horizontal", fontsize=FS+5, fontweight="bold")
+	ax[0,2].text(1.1*dim[0], -0.17*dim[1], r'Golden Ratio $\psi^1$', horizontalalignment='center', verticalalignment='center', color=TCOLOR, rotation="horizontal", fontsize=FS+5, fontweight="bold")
 
 	plt.subplots_adjust(wspace=-0.15, hspace=0.05)
 

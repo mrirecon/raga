@@ -1,4 +1,4 @@
-## Figure 4: Precomputed PSF Analysis
+## Figure 4.A: Precomputed PSF Analysis
 
 All analysis steps can be run using
 

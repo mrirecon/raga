@@ -5,7 +5,20 @@
 """
 import sys
 import os
-sys.path.insert(0, os.path.join(os.environ['TOOLBOX_PATH'], 'python'))
+
+# Check if environmental variable pointing to BART is set correctly
+if "TOOLBOX_PATH" in os.environ:
+	sys.path.insert(0, os.path.join(os.environ['TOOLBOX_PATH'], 'python'))
+elif "BART_TOOLBOX_PATH" in os.environ:
+	sys.path.insert(0, os.path.join(os.environ['BART_TOOLBOX_PATH'], 'python'))
+else:
+	raise AttributeError( \
+		"The Path to the BART toolbox is not set.\n \
+		Please set the environment variable `TOOLBOX_PATH` or `BART_TOOLBOX_PATH` in your shell:\n \
+		\t`export TOOLBOX_PATH=<Path to BART Toolbox>`\n \
+		Example: \n \
+		\t`export TOOLBOX_PATH=/home/user/bart`\n")
+
 import cfl
 
 import numpy as np

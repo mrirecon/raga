@@ -1,7 +1,12 @@
 #!/bin/bash
 
 set -euxB
+set -o pipefail
 
+FLAGS=$1
+OUT=$2
+
+source opts.sh
 
 # Avoid limitation by network traffic
 TMP_DIR=$(mktemp -d)
@@ -9,21 +14,14 @@ trap 'rm -rf "$TMP_DIR"' EXIT
 
 # Traj creation
 
-BR=200
-SPOKES=377
-TIME=100
-
-
 # Golden Angle based Sampling pattern
 
-NUM_GA=1
 bart traj -x$BR -y $SPOKES -G -r --double-base -s $NUM_GA -t $TIME $TMP_DIR/traj_ga
 
-bart phantom -k -t $TMP_DIR/traj_ga $TMP_DIR/k_ga
+bart phantom -s$COILS -k -t $TMP_DIR/traj_ga $TMP_DIR/k_ga
 
 # Reshape data and trajectory
 
-REBIN=29
 BINTIME=$(($((SPOKES*TIME))/REBIN))
 
 bart reshape $(bart bitmask 2 10) 1 $((SPOKES*TIME)) $TMP_DIR/traj_ga $TMP_DIR/_t2
@@ -46,7 +44,7 @@ touch data
 ST=$(date +%s.%3N)
 
 # High Water Mark
-/usr/bin/time -v bart nufft -i $TMP_DIR/traj_ga_rb $TMP_DIR/k_ga_rb $TMP_DIR/reco_ga &> data
+DEBUG_LEVEL=4 /usr/bin/time -v bart nlinv $FLAGS -S -i 10 -t $TMP_DIR/traj_ga_rb $TMP_DIR/k_ga_rb $TMP_DIR/reco_ga &> data
 
 ET=$(date +%s.%3N)
 T=$(echo "${ET}-${ST}" | bc)
@@ -63,10 +61,9 @@ bart traj -x$BR -y $SPOKES -A -G -r --double-base -s $NUM_GA $TMP_DIR/traj_raga
 # Sampling which repeats in time
 bart repmat 10 $TIME $TMP_DIR/traj_raga $TMP_DIR/traj_raga_time
 
-bart phantom -k -t $TMP_DIR/traj_raga_time $TMP_DIR/k_raga
+bart phantom -s$COILS -k -t $TMP_DIR/traj_raga_time $TMP_DIR/k_raga
 
 # Reshape data and trajectory
-LOOP_DIM=11
 BINTIME=$((SPOKES/REBIN))
 
 # bart reshape $(bart bitmask 2 $LOOP_DIM) 1 $SPOKES 
@@ -87,9 +84,9 @@ touch data
 
 ST=$(date +%s.%3N)
 
-/usr/bin/time -v bart nufft -i $TMP_DIR/traj_raga_rb $TMP_DIR/k_raga_rb $TMP_DIR/_reco_raga &> data
+DEBUG_LEVEL=4 /usr/bin/time -v bart nlinv $FLAGS -S -i 10 -t $TMP_DIR/traj_raga_rb $TMP_DIR/k_raga_rb $TMP_DIR/_reco_raga &> data
 
-bart reshape $(bart bitmask 10 $LOOP_DIM) $((BINTIME*TIME)) 1 $TMP_DIR/_reco_raga $TMP_DIR/reco_raga
+bart reshape $(bart bitmask $LOOP_DIM 10) 1 $((BINTIME*TIME)) $TMP_DIR/_reco_raga $TMP_DIR/reco_raga
 
 ET=$(date +%s.%3N)
 T2=$(echo "${ET}-${ST}" | bc)
@@ -104,6 +101,7 @@ echo -e "NRMSE of both reconstructions:\t$(bart nrmse $TMP_DIR/reco{_ga,_raga})"
 echo -e "Elapsed Runtime:\t GA: ${T} s\tRAGA: ${T2} s"
 echo -e "High Water Mark:\t${HWM} kbyte\tLoop: ${HWM2} kbyte\n\n"
 
+
 ###############################
 # GPU Reconstructions
 ###############################
@@ -112,20 +110,21 @@ echo -e "High Water Mark:\t${HWM} kbyte\tLoop: ${HWM2} kbyte\n\n"
 
 # Memory Usage on GPU
 
-id=0
 export CUDA_VISIBLE_DEVICES=${id}
 
+[[ ! -d log ]] && mkdir log
 
-[ -f log_gpu_ga.log ] && rm log_gpu_ga.log
 
-nvidia-smi --id=${id} --query-gpu=memory.used --format=csv --loop-ms=100 > log_gpu_ga.log &
+[ -f log/log_gpu_ga_${OUT}.log ] && rm log/log_gpu_ga_${OUT}.log
+
+nvidia-smi --id=${id} --query-gpu=memory.used --format=csv --loop-ms=100 > log/log_gpu_ga_${OUT}.log &
 # nvidia-smi --id=${id} --query-gpu=timestamp,name,pci.bus_id,driver_version,pstate,pcie.link.gen.max,pcie.link.gen.current,temperature.gpu,utilization.gpu,utilization.memory,memory.total,memory.free,memory.used --format=csv --loop-ms=100 > log_gpu.log &
 
 PID=$!
 
 ST=$(date +%s.%3N)
 
-bart nufft -i -g $TMP_DIR/traj_ga_rb $TMP_DIR/k_ga_rb $TMP_DIR/reco_ga
+DEBUG_LEVEL=4 bart nlinv $FLAGS -g -S -i 10 -t $TMP_DIR/traj_ga_rb $TMP_DIR/k_ga_rb $TMP_DIR/reco_ga
 
 ET=$(date +%s.%3N)
 T_GPU=$(echo "${ET}-${ST}" | bc)
@@ -136,18 +135,19 @@ kill $PID
 
 # Reconstruction of RAGA
 
-[ -f log_gpu_raga.log ] && rm log_gpu_raga.log
+[ -f log/log_gpu_raga_${OUT}.log ] && rm log/log_gpu_raga_${OUT}.log
 
-nvidia-smi --id=${id} --query-gpu=memory.used --format=csv --loop-ms=100 > log_gpu_raga.log &
+nvidia-smi --id=${id} --query-gpu=memory.used --format=csv --loop-ms=100 > log/log_gpu_raga_${OUT}.log &
 
 PID=$!
 
 
 ST=$(date +%s.%3N)
 
-bart nufft -g -i $TMP_DIR/traj_raga_rb $TMP_DIR/k_raga_rb $TMP_DIR/_reco_raga
+# bart nufft -g -i $TMP_DIR/traj_raga_rb $TMP_DIR/k_raga_rb $TMP_DIR/_reco_raga
+DEBUG_LEVEL=4 bart nlinv $FLAGS -g -S -i 10 -t $TMP_DIR/traj_raga_rb $TMP_DIR/k_raga_rb $TMP_DIR/_reco_raga
 
-bart reshape $(bart bitmask 10 $LOOP_DIM) $((BINTIME*TIME)) 1 $TMP_DIR/_reco_raga $TMP_DIR/reco_raga
+bart reshape $(bart bitmask $LOOP_DIM 10) 1 $((BINTIME*TIME)) $TMP_DIR/_reco_raga $TMP_DIR/reco_raga
 
 ET=$(date +%s.%3N)
 T2_GPU=$(echo "${ET}-${ST}" | bc)
@@ -162,10 +162,7 @@ echo -e "Elapsed Runtime:\t GA: ${T_GPU} s\tRAGA: ${T2_GPU} s"
 echo -e "High Water Mark:\t${HWM} kbyte\tLoop: ${HWM2} kbyte\n\n"
 
 
-[ -f data.txt ] && rm data.txt
-touch data.txt
-
-echo -e "${T}\t${T2}\n${T_GPU}\t${T2_GPU}\n${HWM}\t${HWM2}" >> data.txt
+bart vec -- ${T} ${T2} ${T_GPU} ${T2_GPU} ${HWM} ${HWM2} $OUT
 
 
 [ -d $TMP_DIR ] && rm -rf $TMP_DIR

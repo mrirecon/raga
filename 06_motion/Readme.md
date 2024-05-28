@@ -10,3 +10,5 @@ To run all figures execute
 
 #### Output:
 <img src="figure_ref.png" alt="Figure 6" width="500"/>
+
+<video src="movie.mp4" controls="controls" style="max-width: 730px;"></video>

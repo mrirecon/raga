@@ -1,0 +1,8 @@
+# Dimensions
+6 2 10 1 1 1 1 1 1 1 1 1 1 1 1 1 
+# Command
+join 1 nufft nufft_nt joined_data 
+# Files
+ <>joined_data <nufft_nt <nufft
+# Creator
+BART v0.9.00-284-g3107d87

@@ -135,7 +135,7 @@ do
 		bart crop 0 150 _reco_nlinv_median tmp
 		bart crop 1 150 tmp tmp2
 
-		bart flip $(bart bitmask 0 1) tmp2 tmp3
+		bart flip $(bart bitmask 0) tmp2 tmp3
 		
 		bart transpose 0 1 tmp3 reco_nlinv_$(printf "%03.0f" $b)
 

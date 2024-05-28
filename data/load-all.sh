@@ -2,8 +2,8 @@
 
 set -B
 
-#10.5281/zenodo.10260251
-ZENODO_RECORD=10260251
+#10.5281/zenodo.11287905
+ZENODO_RECORD=11287905
 
 FILES=(
 	data_res_S1597
@@ -23,6 +23,5 @@ FILES=(
 
 for i in  "${FILES[@]}";
 do
-
 	./load-cfl.sh ${ZENODO_RECORD} ${i} .
 done
