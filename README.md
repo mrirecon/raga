@@ -7,7 +7,7 @@ This repository includes the scripts to **create** the **Figures and Tables for*
 >
 > Submitted to Magnetic Resonance in Medicine
 > 
-> previous [Preprint on ArXiv (DOI: 10.48550/arXiv.2401.02892)](https://doi.org/10.48550/arXiv.2401.02892)
+> [Preprint on ArXiv (DOI: 10.48550/arXiv.2401.02892)](https://doi.org/10.48550/arXiv.2401.02892)
 
 
 ## Requirements
