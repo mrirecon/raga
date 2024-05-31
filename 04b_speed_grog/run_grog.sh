@@ -92,13 +92,13 @@ rm $TMP_DIR/_k2.{cfl,hdr}
 #   GROG Gridding of Full Timeseries (Golden Ratio)
 # -------------------------------------
 
-/scratch/nscho/bart/bart grog -s 300 --measure-time time_ga $TMP_DIR/traj_ga_rb $TMP_DIR/k_ga_rb $TMP_DIR/traj_ga_grid $TMP_DIR/k_ga_grid
+bart grog -s 300 --measure-time time_ga $TMP_DIR/traj_ga_rb $TMP_DIR/k_ga_rb $TMP_DIR/traj_ga_grid $TMP_DIR/k_ga_grid
 
 # -------------------------------------
 #   GROG Gridding of Repeating Timeseries (RAGA)
 # -------------------------------------
 
-/scratch/nscho/bart/bart grog -s 300 --measure-time time_raga $TMP_DIR/traj_raga_rb $TMP_DIR/k_raga_rb $TMP_DIR/traj_raga_grid $TMP_DIR/k_raga_grid
+bart grog -s 300 --measure-time time_raga $TMP_DIR/traj_raga_rb $TMP_DIR/k_raga_rb $TMP_DIR/traj_raga_grid $TMP_DIR/k_raga_grid
 
 
 # Write runtimes to file
