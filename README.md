@@ -1,4 +1,4 @@
-# Rational Approximation of Golden Angles: Accelerated Reconstructions with Simple and Numerically Reproducible Radial Sampling
+# Rational Approximation of Golden Angles: Accelerated Reconstructions for Radial MRI
 
 This repository includes the scripts to **create** the **Figures and Tables for** the publication
 
@@ -9,6 +9,8 @@ This repository includes the scripts to **create** the **Figures and Tables for*
 > 
 > [Preprint on ArXiv (DOI: 10.48550/arXiv.2401.02892)](https://doi.org/10.48550/arXiv.2401.02892)
 
+it provides basic comments and guidance through the workflows related to this publication.
+Please find more details in the [interactive tutorial about RAGA sampling in BART on Github:mrirecon/raga-tutorial](https://github.com/mrirecon/raga-tutorial).
 
 ## Requirements
 This repository has been tested on Debian 12, but is assumed to work on other Linux-based operating systems, too.
