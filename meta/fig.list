@@ -1,7 +1,7 @@
-./03_incoherence/run_figs.sh
-./05_phantom/run_figs.sh
-./06_motion/run_figs.sh
+./04_incoherence/run_figs.sh
+./06_phantom/run_figs.sh
+./07_motion/run_figs.sh
 
 # scripts not for paper CI pipeline
-# ./04a_speedup_num_error/run_figs.sh
-# ./04b_speed_grog/run_figs.sh
+# ./05a_speedup_num_error/run_figs.sh
+# ./05b_speed_grog/run_figs.sh

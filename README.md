@@ -2,7 +2,7 @@
 
 This repository includes the scripts to **create** the **Figures and Tables for** the publication
 
-> #### Rational Approximation of Golden Angles: Accelerated Reconstructions with Simple and Numerically Reproducible Radial Sampling
+> #### Rational Approximation of Golden Angles: Accelerated Reconstructions for Radial MRI
 > N. Scholand, P. Schaten, C. Graf, D. Mackner, H.C.M. Holme, M. Blumenthal, A. Mao, J. Assländer, and M. Uecker
 >
 > Submitted to Magnetic Resonance in Medicine
@@ -16,7 +16,7 @@ Virtual environments like a Windows Subsystem for Linux might work, but have not
 
 #### Reconstruction
 Preprocessing, reconstruction and postprocessing is performed with the [BART toolbox](https://github.com/mrirecon/bart).
-The provided scripts are mostly compatible with [version 0.9.00](https://doi.org/10.5281/zenodo.10277939), but the GROG calibration and gridding requires at least commit `3107d877` or later, which will be included in the next release following version 0.09.00.
+The provided scripts are mostly compatible with [version 0.9.00](https://doi.org/10.5281/zenodo.10277939), but the GROG calibration and gridding requires at least commit `79fd4a72` or later, which will be included in the next release following version 0.9.00.
 If you experience any compatibility problems with later BART versions please contact us!
 
 For running the reconstructions access to a GPU is recommended.
@@ -44,10 +44,10 @@ export BART_TOOLBOX_PATH=<Path to BART Toolbox>
 #### Data
 The data is hosted on [ZENODO](https://zenodo.org/) and **must be downloaded first**.
 
-* Manual download: https://doi.org/10.5281/zenodo.11287905
+* Manual download: https://doi.org/10.5281/zenodo.12728657
 * Download via script: Run the download script in the `./data` folder.
   * **All** files: `bash load-all.sh`
-  * **Individual** files: `bash load.sh 11287905 <FILENAME> . `
+  * **Individual** files: `bash load.sh 12728657 <FILENAME> . `
 
 Note: The data must be stored in the `./data` folder!
 
@@ -59,7 +59,7 @@ Each folder contains a README file explaining how the figure can be reproduced.
 
 |    CPU   |   GPU   | **Runtime** [min] |
 | -------- | ------- | ------- |
-| Intel Xeon Gold 6132 | NVIDIA Tesla V100 SXM2 32 GB  | ~2 h (+ ~11 h with GROG benchmark) |
+| Intel Xeon Gold 6132 | NVIDIA Tesla V100 SXM2 32 GB  | ~2 h |
 
 
 ## License

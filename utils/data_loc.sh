@@ -2,7 +2,7 @@
 
 set +u
 
-REPO_NAME=raga_rev1
+REPO_NAME=raga_rev2
 
 if [ ! -d ${DATA_ARCHIVE}/${REPO_NAME} ] ; then
 	FOLDER=$(dirname $(readlink -f $BASH_SOURCE))
