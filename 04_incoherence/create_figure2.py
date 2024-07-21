@@ -165,3 +165,4 @@ if __name__ == "__main__":
 
 	fig.savefig(filename + ".png", bbox_inches='tight', transparent=False)
 	fig.savefig(filename + ".svg", bbox_inches='tight', transparent=False)
+	fig.savefig(filename + ".pdf", bbox_inches='tight', transparent=False)

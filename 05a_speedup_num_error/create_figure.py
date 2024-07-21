@@ -28,8 +28,11 @@ import cfl
 
 FS = 15
 
+BCOLOR='white'  # Background color
+TCOLOR='black'  # Text color
 
-
+COLOR1="red"
+COLOR2="green"
 
 if __name__ == "__main__":
 	#Error if wrong number of parameters
@@ -60,6 +63,10 @@ if __name__ == "__main__":
 
 	if(DARK):
 		plt.style.use(['dark_background'])
+		BCOLOR='black'
+		TCOLOR='white'
+		COLOR1="yellow"
+		COLOR2="cyan"
 	else:
 		plt.style.use(['default'])
 
@@ -137,38 +144,38 @@ if __name__ == "__main__":
 		x = np.arange(len(labels))  # the label locations
 		width = 0.35  # the width of the bars
 
-		rects1 =ax[ii].bar(x[0] - width/2, np.mean(time[0,:]), width, color="red", alpha=0.4)
-		ax[ii].errorbar(x[0] - width/2, np.mean(time[0,:]), yerr=np.std(time[0,:]), color="k", fmt='.', label='Std of '+str(int(np.shape(time)[1]))+' Runs')
+		rects1 =ax[ii].bar(x[0] - width/2, np.mean(time[0,:]), width, color=COLOR1, alpha=0.4)
+		ax[ii].errorbar(x[0] - width/2, np.mean(time[0,:]), yerr=np.std(time[0,:]), color=TCOLOR, fmt='.', label='Std of '+str(int(np.shape(time)[1]))+' Runs')
 
-		rects2 =ax[ii].bar(x[0] + width/2, np.mean(time[1,:]), width, color="red")
-		ax[ii].errorbar(x[0] + width/2, np.mean(time[1,:]), yerr=np.std(time[1,:]), color="k", fmt='.')
+		rects2 =ax[ii].bar(x[0] + width/2, np.mean(time[1,:]), width, color=COLOR1)
+		ax[ii].errorbar(x[0] + width/2, np.mean(time[1,:]), yerr=np.std(time[1,:]), color=TCOLOR, fmt='.')
 
-		rects1 =ax[ii].bar(x[1] - width/2, np.mean(time_GPU[0,:]), width, color="red", alpha=0.4,)
-		ax[ii].errorbar(x[1] - width/2, np.mean(time_GPU[0,:]), yerr=np.std(time_GPU[0,:]), color="k", fmt='.')
+		rects1 =ax[ii].bar(x[1] - width/2, np.mean(time_GPU[0,:]), width, color=COLOR1, alpha=0.4,)
+		ax[ii].errorbar(x[1] - width/2, np.mean(time_GPU[0,:]), yerr=np.std(time_GPU[0,:]), color=TCOLOR, fmt='.')
 
-		rects2 =ax[ii].bar(x[1] + width/2, np.mean(time_GPU[1,:]), width, color="red")
-		ax[ii].errorbar(x[1] + width/2, np.mean(time_GPU[1,:]), yerr=np.std(time_GPU[1,:]), color="k", fmt='.')
+		rects2 =ax[ii].bar(x[1] + width/2, np.mean(time_GPU[1,:]), width, color=COLOR1)
+		ax[ii].errorbar(x[1] + width/2, np.mean(time_GPU[1,:]), yerr=np.std(time_GPU[1,:]), color=TCOLOR, fmt='.')
 
 		ax2 =ax[ii].twinx()
 
-		rects3 = ax2.bar(x[2] - width/2, np.mean(hwm[0,:]), width, color="green", alpha=0.4)
-		ax2.errorbar(x[2] - width/2, np.mean(hwm[0,:]), yerr=np.std(hwm[0,:]), color="k", fmt='.')
+		rects3 = ax2.bar(x[2] - width/2, np.mean(hwm[0,:]), width, color=COLOR2, alpha=0.4)
+		ax2.errorbar(x[2] - width/2, np.mean(hwm[0,:]), yerr=np.std(hwm[0,:]), color=TCOLOR, fmt='.')
 
-		rects4 = ax2.bar(x[2] + width/2, np.mean(hwm[1,:]), width, color="green", label='RAGA')
-		ax2.errorbar(x[2] + width/2, np.mean(hwm[1,:]), yerr=np.std(hwm[1,:]), color="k", fmt='.')
+		rects4 = ax2.bar(x[2] + width/2, np.mean(hwm[1,:]), width, color=COLOR2, label='RAGA')
+		ax2.errorbar(x[2] + width/2, np.mean(hwm[1,:]), yerr=np.std(hwm[1,:]), color=TCOLOR, fmt='.')
 
-		rects3 = ax2.bar(x[3] - width/2, gpu_mem_ga_mean, width, color="green", alpha=0.4)
-		ax2.errorbar(x[3] - width/2, gpu_mem_ga_mean, yerr=gpu_mem_ga_std, color="k", fmt='.')
+		rects3 = ax2.bar(x[3] - width/2, gpu_mem_ga_mean, width, color=COLOR2, alpha=0.4)
+		ax2.errorbar(x[3] - width/2, gpu_mem_ga_mean, yerr=gpu_mem_ga_std, color=TCOLOR, fmt='.')
 
-		rects4 = ax2.bar(x[3] + width/2, gpu_mem_raga_mean, width, color="green", label='RAGA')
-		ax2.errorbar(x[3] + width/2, gpu_mem_raga_mean, yerr=gpu_mem_raga_std, color="k", fmt='.')
+		rects4 = ax2.bar(x[3] + width/2, gpu_mem_raga_mean, width, color=COLOR2, label='RAGA')
+		ax2.errorbar(x[3] + width/2, gpu_mem_raga_mean, yerr=gpu_mem_raga_std, color=TCOLOR, fmt='.')
 
 		# x-ticks
 
 		ax[ii].set_xticks(x)
 		ax[ii].set_xticklabels(labels, fontsize = FS)
 
-		for l,i in zip(ax[ii].xaxis.get_ticklabels(),["red", "red", "green", "green"]):
+		for l,i in zip(ax[ii].xaxis.get_ticklabels(),[COLOR1, COLOR1, COLOR2, COLOR2]):
 			l.set_color(i)
 
 		# Rectangles
@@ -188,12 +195,12 @@ if __name__ == "__main__":
 					rect.get_x() + rect.get_width() / 2, 1.005*height, method, ha="center", va="bottom", fontsize = FS-3
 				)
 
-			ax[ii].set_title('nuFFT Reconstruction', color='k', fontsize=FS)
+			ax[ii].set_title('nuFFT Reconstruction', color=TCOLOR, fontsize=FS)
 
 		if (1 == ii):
-			ax[ii].text((x[1] - x[0]) / 2, -71, "Reconstruction\nTime / s", ha="center", va="center", fontsize = FS, color="red")
+			ax[ii].text((x[1] - x[0]) / 2, -71, "Reconstruction\nTime / s", ha="center", va="center", fontsize = FS, color=COLOR1)
 
-			ax[ii].text((x[3] + x[2]) / 2, -71, "Maximum\nMemory / Gbytes", ha="center", va="center", fontsize = FS, color="green")
+			ax[ii].text((x[3] + x[2]) / 2, -71, "Maximum\nMemory / Gbytes", ha="center", va="center", fontsize = FS, color=COLOR2)
 
 			ax[ii].legend(fancybox=True, framealpha=0.5, loc='upper left', fontsize = FS-2)
 
@@ -202,17 +209,17 @@ if __name__ == "__main__":
 		print(time)
 
 		ax[ii].set_ylim([0, 200]) #1.2*max(time)])
-		ax[ii].tick_params(axis='y', colors="red", labelsize=FS)
-		ax[ii].yaxis.label.set_color("red")
+		ax[ii].tick_params(axis='y', colors=COLOR1, labelsize=FS)
+		ax[ii].yaxis.label.set_color(COLOR1)
 
 		# ax[ii].text(0.9, 0.9*1.2*max([hwm[0], hwm[1], gpu_mem_ga_mean, gpu_mem_raga_mean]), reco_tech[ii], fontsize = FS, ha="right", va="top", bbox=dict(boxstyle="round,pad=0.1", facecolor='white', alpha=0.95))
 
-		ax[ii].set_ylabel(titles[ii], color='k', fontsize=FS)
+		ax[ii].set_ylabel(titles[ii], color=TCOLOR, fontsize=FS)
 
 		ax2.set_ylim([0, 13]) #1.2*max([hwm[0], hwm[1], gpu_mem_ga_mean, gpu_mem_raga_mean])])
-		ax2.tick_params(axis='y', colors="green", labelsize=FS)
-		ax2.spines["right"].set_edgecolor("green")
-		ax2.yaxis.label.set_color("green")
+		ax2.tick_params(axis='y', colors=COLOR2, labelsize=FS)
+		ax2.spines["right"].set_edgecolor(COLOR2)
+		ax2.yaxis.label.set_color(COLOR2)
 
 	plt.tight_layout()
 	

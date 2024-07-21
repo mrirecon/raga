@@ -34,7 +34,7 @@ DARK = 0 #dark layout?
 BCOLOR='white'  # Background color
 TCOLOR='black'  # Text color
 
-COLOR=['C0', 'C1', 'C2', 'C3', 'C4', 'C5']
+COLOR=['C0', 'C1', 'C2']
 
 TR = 2.9 # ms
 
@@ -110,6 +110,7 @@ if __name__ == "__main__":
 		plt.style.use(['dark_background'])
 		BCOLOR='black'
 		TCOLOR='white'
+		COLOR=['C0', 'orange', 'cyan']
 	else:
 		plt.style.use(['default'])
 

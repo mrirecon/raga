@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
 		im2 = ax[2,i].imshow(joined, cmap="gray", vmin=VMIN, vmax=VMAX)
 
-		ax[2,i].text(0.99*dim[0], 0.99*dim[1], "x"+str(int(DIFF_SCALING)), horizontalalignment='right', verticalalignment='bottom', color=BCOLOR, rotation="horizontal", fontsize=FS-5, fontweight="bold")
+		ax[2,i].text(0.99*dim[0], 0.99*dim[1], "x"+str(int(DIFF_SCALING)), horizontalalignment='right', verticalalignment='bottom', color=TCOLOR, rotation="horizontal", fontsize=FS-5, fontweight="bold")
 		
 
 		ax[2,i].set_yticklabels([])
@@ -145,7 +145,7 @@ if __name__ == "__main__":
 	cbar = fig.colorbar(sm, cax=cbar_ax)
 	cbar.ax.tick_params(labelsize=FS)
 
-	ax[0,0].text(-0.2* dim[0], -0.2*dim[1], "C", fontsize=FS+10, horizontalalignment='center', verticalalignment='center', rotation='horizontal', weight='bold')
+	ax[0,0].text(-0.2* dim[0], -0.2*dim[1], "C", fontsize=FS+10, horizontalalignment='center', verticalalignment='center', rotation='horizontal', weight='bold', color=TCOLOR)
 
 	plt.subplots_adjust(wspace=0.02, hspace=0.05)
 

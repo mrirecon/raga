@@ -4,14 +4,15 @@ set -eux
 
 
 
-# ./run.sh
+./run.sh
 
 
 # Visualization
 
+export DARK_LAYOUT=0
+
 ## A: Resolution Subfigure
 python3 create_figure_A.py spokes.txt joined_recos diff_recos figure_A
-
 
 ## B: Binning Presentation
 

@@ -26,7 +26,8 @@ import cfl
 FS = 20
 MS = 10
 
-
+BCOLOR='white'  # Background color
+TCOLOR='black'  # Text color
 
 if __name__ == "__main__":
 	#Error if wrong number of parameters
@@ -52,6 +53,8 @@ if __name__ == "__main__":
 
 	if(DARK):
 		plt.style.use(['dark_background'])
+		BCOLOR='black'
+		TCOLOR='white'
 	else:
 		plt.style.use(['default'])
 
@@ -79,19 +82,19 @@ if __name__ == "__main__":
 	width = 0.35  # the width of the bars
 
 	rects1 =ax.bar(x[0] - width/2, np.mean(tcal[0,:]), width, color="orange", alpha=0.4)
-	ax.errorbar(x[0] - width/2, np.mean(tcal[0,:]), yerr=np.std(tcal[0,:]), color="k", fmt='.', markersize=MS, label='Std of '+str(int(np.shape(tcal)[1]))+' Runs')
+	ax.errorbar(x[0] - width/2, np.mean(tcal[0,:]), yerr=np.std(tcal[0,:]), color=TCOLOR, fmt='.', markersize=MS, label='Std of '+str(int(np.shape(tcal)[1]))+' Runs')
 
 	rects2 =ax.bar(x[0] + width/2, np.mean(tcal[1,:]), width, color="orange")
-	ax.errorbar(x[0] + width/2, np.mean(tcal[1,:]), yerr=np.std(tcal[1,:]), color="k", fmt='.', markersize=MS)
+	ax.errorbar(x[0] + width/2, np.mean(tcal[1,:]), yerr=np.std(tcal[1,:]), color=TCOLOR, fmt='.', markersize=MS)
 
 	ax2 =ax.twinx()
 	ax3 =ax.twinx()
 
 	rects1 =ax2.bar(x[1] - width/2, np.mean(tgrid[0,:]), width, color="steelblue")
-	ax2.errorbar(x[1] - width/2, np.mean(tgrid[0,:]), yerr=np.std(tgrid[0,:]), color="k", fmt='.', markersize=MS)
+	ax2.errorbar(x[1] - width/2, np.mean(tgrid[0,:]), yerr=np.std(tgrid[0,:]), color=TCOLOR, fmt='.', markersize=MS)
 
 	rects2 =ax3.bar(x[1] + width/2, np.mean(tgrid[1,:]), width, color="blue")
-	ax3.errorbar(x[1] + width/2, np.mean(tgrid[1,:]), yerr=np.std(tgrid[1,:]), color="k", fmt='.', markersize=MS)
+	ax3.errorbar(x[1] + width/2, np.mean(tgrid[1,:]), yerr=np.std(tgrid[1,:]), color=TCOLOR, fmt='.', markersize=MS)
 
 	# x-ticks
 

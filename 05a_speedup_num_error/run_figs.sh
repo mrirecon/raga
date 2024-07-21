@@ -4,6 +4,7 @@ set -eux
 
 ./run.sh
 
+export DARK_LAYOUT=0
 
 [[ -f methods.txt ]] && rm methods.txt
 touch methods.txt

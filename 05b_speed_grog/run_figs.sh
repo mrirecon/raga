@@ -4,6 +4,8 @@ set -eux
 
 ./run.sh
 
+export DARK_LAYOUT=0
+
 # Visualization
 python3 create_figure.py grog figure
 

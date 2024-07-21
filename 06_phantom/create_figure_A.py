@@ -103,7 +103,7 @@ if __name__ == "__main__":
 		
 			ax[1,i].set_visible(False)
 
-			ax[0,i].text(0.99*dim[0], 0.99*dim[1], "Ref", horizontalalignment='right', verticalalignment='bottom', color=BCOLOR, rotation="horizontal", fontsize=FS-5, fontweight="bold")
+			ax[0,i].text(0.99*dim[0], 0.99*dim[1], "Ref", horizontalalignment='right', verticalalignment='bottom', color=TCOLOR, rotation="horizontal", fontsize=FS-5, fontweight="bold")
 
 		else:
 
@@ -115,7 +115,7 @@ if __name__ == "__main__":
 
 			im2 = ax[1,i].imshow(joined, cmap="gray", vmin=VMIN, vmax=VMAX)
 
-			ax[1,i].text(0.99*dim[0], 0.99*dim[1], "x"+str(int(DIFF_SCALE)), horizontalalignment='right', verticalalignment='bottom', color=BCOLOR, rotation="horizontal", fontsize=FS-5, fontweight="bold")
+			ax[1,i].text(0.99*dim[0], 0.99*dim[1], "x"+str(int(DIFF_SCALE)), horizontalalignment='right', verticalalignment='bottom', color=TCOLOR, rotation="horizontal", fontsize=FS-5, fontweight="bold")
 			
 
 			ax[1,i].set_yticklabels([])
@@ -130,7 +130,7 @@ if __name__ == "__main__":
 
 			ax[1,i].set_ylabel(r"abs(Ref-Img)", fontsize=FS-10)
 
-			ax[0,i].text(0.99*dim[0], 0.99*dim[1], "Img", horizontalalignment='right', verticalalignment='bottom', color=BCOLOR, rotation="horizontal", fontsize=FS-5, fontweight="bold")
+			ax[0,i].text(0.99*dim[0], 0.99*dim[1], "Img", horizontalalignment='right', verticalalignment='bottom', color=TCOLOR, rotation="horizontal", fontsize=FS-5, fontweight="bold")
 
 	# Title
 	ax[0,0].text(0.99*dim[0] + dim[2]//2 * dim[0], -0.3*dim[1], "Spokes/Frame", horizontalalignment='center', verticalalignment='bottom', color=TCOLOR, rotation="horizontal", fontsize=FS+5, fontweight="bold")
