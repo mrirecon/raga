@@ -1,3 +1,6 @@
+**The main repository has moved to: https://gitlab.tugraz.at/ibi/mrirecon/papers/raga**
+
+
 # Rational Approximation of Golden Angles: Accelerated Reconstructions for Radial MRI
 
 This repository includes the scripts to **create** the **Figures and Tables for** the publication
